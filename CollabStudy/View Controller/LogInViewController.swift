@@ -32,6 +32,8 @@ class LogInViewController: UIViewController {
     
     
     @IBAction func logInButton(_ sender: Any) {
+        
+        
         let error = self.validateInputs()
         
         if(error != nil) {
@@ -42,8 +44,10 @@ class LogInViewController: UIViewController {
             Auth.auth().signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!) { (result, error) in
                     
                     if error != nil {
-                        self.showError("Something went wrong")
+                        self.showError((error?.localizedDescription)!)
                     } else {
+                        UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+                        
                         self.transtitionToHome()
                         
                     }

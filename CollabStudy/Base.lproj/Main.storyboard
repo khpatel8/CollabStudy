@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="9.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="lMy-JR-Dw4">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lMy-JR-Dw4">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="f0v-SJ-syf">
@@ -44,6 +44,23 @@
                                     <constraint firstItem="Vjt-sX-xIY" firstAttribute="height" secondItem="6qR-gT-yIJ" secondAttribute="height" id="xsr-cb-wxU"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mkO-j9-ESg">
+                                <rect key="frame" x="277" y="834" width="31" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="unchecked.png"/>
+                                <connections>
+                                    <action selector="checkBoxTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dNR-0e-zs7"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" keep me signed in " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSb-BV-FrI">
+                                <rect key="frame" x="127" y="836" width="148" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
@@ -60,6 +77,7 @@
                     <navigationItem key="navigationItem" id="yJt-X0-rnr"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="checkBoxOutlet" destination="mkO-j9-ESg" id="idr-CM-Qdr"/>
                         <outlet property="imageView" destination="lMy-JR-Dw4" id="yvY-qK-IWH"/>
                         <outlet property="logInButton" destination="6qR-gT-yIJ" id="YZG-jB-uQx"/>
                         <outlet property="signUpButton" destination="Vjt-sX-xIY" id="H3g-OK-RKw"/>
@@ -298,7 +316,7 @@
         <scene sceneID="hD0-1q-We0">
             <objects>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="R2k-4i-YOt" customClass="ClassPostsTableViewController" customModule="CollabStudy" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="odS-Uo-hbF">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="odS-Uo-hbF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -579,9 +597,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="9.jpg" width="2917" height="3872"/>
         <image name="book" catalog="system" width="64" height="50"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
         <image name="person" catalog="system" width="64" height="58"/>
+        <image name="unchecked.png" width="64" height="64"/>
     </resources>
 </document>

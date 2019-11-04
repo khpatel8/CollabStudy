@@ -53,10 +53,12 @@ class ProfileViewController: UIViewController {
     
     @IBAction func logOutBtn(_ sender: Any) {
         do {
-              try Auth.auth().signOut()
-              self.transtitionToMain()
+            try Auth.auth().signOut()
+            UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
+            UserDefaults.standard.set(false, forKey: "isKeepMeSignedInChecked")
+            self.transtitionToMain()
         } catch {
-              print("Error signing out")
+            print("Error signing out")
         }
     }
     
@@ -71,15 +73,4 @@ class ProfileViewController: UIViewController {
       
     }
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

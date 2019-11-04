@@ -46,7 +46,7 @@ class ClassPostsTableViewController: UITableViewController {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "postscell", for: indexPath) as? PostCellTableViewCell
             
-            cell?.postImageView.image = UIImage(named: "3.jpg")
+            cell?.postImageView.image = UIImage(named: "1.jpg")
             return cell!
             
         } else {
