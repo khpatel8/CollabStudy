@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>705806888185-cm7qr2qgs7rs9o3m2mf7t3jqspelg7p6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.705806888185-cm7qr2qgs7rs9o3m2mf7t3jqspelg7p6</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA9uSTPF2OIrbSxGzkyjXpjYoyE8VxKSzc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>705806888185</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>asu.CollabStudy</string>
+	<key>PROJECT_ID</key>
+	<string>collab-study</string>
+	<key>STORAGE_BUCKET</key>
+	<string>collab-study.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:705806888185:ios:d31b855d4a33d2dc2b4628</string>
+	<key>DATABASE_URL</key>
+	<string>https://collab-study.firebaseio.com</string>
+</dict>
+</plist>
