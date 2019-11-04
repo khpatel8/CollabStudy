@@ -7,21 +7,15 @@
 //
 
 import UIKit
-import FirebaseAuth
 import Firebase
 
 class HomeViewController: UIViewController {
-
-    @IBOutlet weak var logOutBtn: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).observe(.value, with: { (snapshot) in
-            
-            print(snapshot.value!)
-        })
+       
     }
  
     
