@@ -1,0 +1,6 @@
+framework module Pods_CollabStudy {
+  umbrella header "Pods-CollabStudy-umbrella.h"
+
+  export *
+  module * { export * }
+}
