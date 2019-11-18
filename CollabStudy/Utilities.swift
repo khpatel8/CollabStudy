@@ -28,6 +28,7 @@ class Utilities {
         if button.tag == 1 {
             button.layer.cornerRadius = 20.0
         }
+        
         button.layer.cornerRadius = 25.0
 
         button.tintColor = UIColor.white

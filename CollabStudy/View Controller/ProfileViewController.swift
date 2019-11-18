@@ -17,15 +17,12 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var emailLabel: UILabel!
     
-    @IBOutlet weak var logOut: UIButton! {
-        didSet {
-            Utilities.styleFilledButton(self.logOut)
-        }
-    }
+    @IBOutlet weak var logOut: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         fillNameAndEmailfield()
         // Do any additional setup after loading the view.
         
@@ -37,16 +34,12 @@ class ProfileViewController: UIViewController {
         let dataRef = Database.database().reference()
         let childRef = dataRef.child("users").child((uid)!)
         
-        DispatchQueue.main.async {
-            self.emailLabel.text = Auth.auth().currentUser?.email
-        }
-        
+        self.emailLabel.text = Auth.auth().currentUser?.email
+                
         childRef.observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             
-            DispatchQueue.main.async {
-                self.nameLabel.text = " \(value?["firstname"] as! String) \(value?["lastname"] as! String)"
-            }
+                self.nameLabel.text = "\(value?["firstname"] as! String) \(value?["lastname"] as! String)"
         })
   
     }
@@ -70,7 +63,7 @@ class ProfileViewController: UIViewController {
     
     
     @IBAction func editBtn(_ sender: Any) {
-      
+        
     }
     
 }

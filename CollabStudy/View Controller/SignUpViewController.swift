@@ -55,7 +55,6 @@ class SignUpViewController: UIViewController {
                     self.transtitionToHome()
                 }
             }
-            
         }
     }
     
@@ -67,7 +66,7 @@ class SignUpViewController: UIViewController {
         view.window?.makeKeyAndVisible()
     }
 
-    func validateInputs() -> String?{
+    func validateInputs() -> String? {
         
         if firstNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
            lastNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
