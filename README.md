@@ -16,6 +16,10 @@ Sign Up Page
 
 ![Simulator Screen Shot - iPhone 11 Pro Max - 2019-11-04 at 00 14 10](https://user-images.githubusercontent.com/56375328/69174975-2214ab80-0ac0-11ea-9abc-d7445c54b127.png)
 
+Profile View
+
+![Simulator Screen Shot - iPhone 11 Pro Max - 2019-11-04 at 00 17 45](https://user-images.githubusercontent.com/56375328/69175721-8b48ee80-0ac1-11ea-8821-d434989e2e35.png)
+
 Tab Bar Scene
 
 ![Simulator Screen Shot - iPhone 11 Pro Max - 2019-11-04 at 00 17 49](https://user-images.githubusercontent.com/56375328/69174978-2214ab80-0ac0-11ea-87ff-3c8425826938.png)
