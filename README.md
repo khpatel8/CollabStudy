@@ -1,4 +1,4 @@
-# CollabStudy
+# CollabStudy (In progress)
 
 This iOS App Project is designed for college students to collaberate and study together on their class work. Students can form groups for classes and post stuff into it.
 
