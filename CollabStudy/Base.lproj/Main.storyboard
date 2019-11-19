@@ -250,7 +250,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="52" id="QSC-SA-1AS">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="52" id="QSC-SA-1AS" customClass="AvailableClassesTableViewCell" customModule="CollabStudy" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QSC-SA-1AS" id="Ucw-B9-ENG">
@@ -287,7 +287,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qPp-XX-OuU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4258" y="-302"/>
+            <point key="canvasLocation" x="4257.971014492754" y="-302.00892857142856"/>
         </scene>
         <!--Your Classes-->
         <scene sceneID="WdN-Yd-kLi">
@@ -366,37 +366,28 @@
                             </connections>
                         </segmentedControl>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postscell" rowHeight="650" id="OMc-cA-mHq" customClass="PostCellTableViewCell" customModule="CollabStudy" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="60" width="414" height="650"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postscell" rowHeight="464" id="OMc-cA-mHq" customClass="PostCellTableViewCell" customModule="CollabStudy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="60" width="414" height="464"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OMc-cA-mHq" id="J6u-1J-5cW">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="650"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="464"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92H-Wd-hac">
-                                            <rect key="frame" x="8" y="470" width="398" height="180"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <string key="text">This is a sample test.This is a sample test.This is a sample test.This is a sample test.This is a sample test.This is a sample test.This is a sample test.This is a sample test.This is a sample test.This is a sample test.This is a sample test.This is a sample test.This is a sample test.This is a sample test.This is a sample test.This is a sample test.This is a sample test.This is a sample test. This is a sample test. </string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6xd-SC-bmU">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="462"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <gestureRecognizers/>
-                                            <connections>
-                                                <outletCollection property="gestureRecognizers" destination="qmU-ld-IFw" appends="YES" id="F2f-zu-ngD"/>
-                                            </connections>
                                         </imageView>
                                     </subviews>
+                                    <gestureRecognizers/>
                                 </tableViewCellContentView>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="postImageView" destination="6xd-SC-bmU" id="sHg-Wz-UQ7"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="locationcell" textLabel="Nb2-u1-Yvu" rowHeight="200" style="IBUITableViewCellStyleDefault" id="W2F-1D-ah3" customClass="PostCellTableViewCell" customModule="CollabStudy" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="710" width="414" height="200"/>
+                                <rect key="frame" x="0.0" y="524" width="414" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W2F-1D-ah3" id="fnp-Nk-xMc">
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="200"/>
@@ -415,25 +406,43 @@
                                     <segue destination="zev-vR-8hI" kind="show" id="Epm-2a-WEC"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" reuseIdentifier="textcell" textLabel="Vot-DI-DQg" rowHeight="200" style="IBUITableViewCellStyleDefault" id="MeM-oa-mkn" customClass="PostCellTableViewCell" customModule="CollabStudy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="724" width="414" height="200"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MeM-oa-mkn" id="JWh-dl-PFK">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vot-DI-DQg">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="R2k-4i-YOt" id="1WJ-a0-36W"/>
                             <outlet property="delegate" destination="R2k-4i-YOt" id="Ts9-hc-ef9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="t9y-nb-0S2"/>
+                    <navigationItem key="navigationItem" id="t9y-nb-0S2">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="0Iq-8s-CfO">
+                            <connections>
+                                <action selector="addBtnPost:" destination="R2k-4i-YOt" id="Hp2-jL-i9C"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="sc" destination="Fcp-N0-AWl" id="0hL-sS-dCr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N0E-zD-gwR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="qmU-ld-IFw">
-                    <connections>
-                        <action selector="imageTapped:" destination="R2k-4i-YOt" id="4aE-KV-5l5"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="6890" y="102"/>
+            <point key="canvasLocation" x="6889.8550724637689" y="101.78571428571428"/>
         </scene>
         <!--Location View Controller-->
         <scene sceneID="tBC-JM-os1">

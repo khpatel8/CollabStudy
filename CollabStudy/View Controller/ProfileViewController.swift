@@ -34,6 +34,8 @@ class ProfileViewController: UIViewController {
         let dataRef = Database.database().reference()
         let childRef = dataRef.child("users").child((uid)!)
         
+        
+        
         self.emailLabel.text = Auth.auth().currentUser?.email
                 
         childRef.observeSingleEvent(of: .value, with: { (snapshot) in

@@ -22,6 +22,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UISearchBarDele
     
         searchBar.delegate = self
         loadTable()
+        
     }
     
     
@@ -48,11 +49,48 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UISearchBarDele
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AvailableClassesTableViewCell
         
         cell.textLabel?.text = classesArr[indexPath.row]
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let uid = Auth.auth().currentUser?.uid
+        let chilRef = Database.database().reference().child(uid!)
+        
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.accessoryType = .checkmark
+        
+        
+        chilRef.observeSingleEvent(of: .value) { (snapshot) in
+            var arr: [String] = []
+            var found: Bool = false
+            
+            if snapshot.exists() {
+                arr = (snapshot.value! as? [String])!
+                
+                for x in arr {
+                    if x == cell?.textLabel!.text {  found = true }
+                }
+                 
+            } else {
+                print("else\n\n")
+            }
+            
+            if found == false {
+                arr.append((cell?.textLabel!.text)!)
+                chilRef.setValue(arr) { (error, dataRef) in
+                    if error != nil {
+                        print("Error setting value from didSelect")
+                    }
+                }
+            } else {
+                print("Already exists")
+            }
+        }
     }
     
     
@@ -105,5 +143,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UISearchBarDele
         alertController.addAction(addAction)
         present(alertController, animated: true)
     }
+    
+    
+    
     
 }

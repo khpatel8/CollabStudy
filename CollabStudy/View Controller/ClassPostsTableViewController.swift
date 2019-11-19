@@ -11,34 +11,20 @@ import UIKit
 
 class ClassPostsTableViewController: UITableViewController {
 
+    //var Posts: [postModel] = []
+    var text1: [Any] = []
+    var img: [UIImage] = []
+    
     @IBOutlet weak var sc: UISegmentedControl! 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadPosts()
     }
 
     @IBAction func scValueChanges(_ sender: Any) {
         tableView.reloadData()
-    }
-    
-    @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
-        let imageView = sender.view as! UIImageView
-        let newImageView = UIImageView(image: imageView.image)
-        newImageView.frame = UIScreen.main.bounds
-        newImageView.backgroundColor = .black
-        newImageView.contentMode = .scaleToFill
-        newImageView.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-        newImageView.addGestureRecognizer(tap)
-        self.view.addSubview(newImageView)
-        self.navigationController?.isNavigationBarHidden = true
-        self.tabBarController?.tabBar.isHidden = true
-    }
-    
-    @objc private func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
-        self.navigationController?.isNavigationBarHidden = false
-        self.tabBarController?.tabBar.isHidden = false
-        sender.view?.removeFromSuperview()
     }
     
     
@@ -47,7 +33,7 @@ class ClassPostsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if sc.selectedSegmentIndex == 0 {
-            return 3
+            return text1.count
         } else {
             return 1
         }
@@ -55,7 +41,7 @@ class ClassPostsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if sc.selectedSegmentIndex == 0 {
-            return 650
+            return 100
         }
         else {
             return 200
@@ -66,19 +52,61 @@ class ClassPostsTableViewController: UITableViewController {
         
         if sc.selectedSegmentIndex == 0 {
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "postscell", for: indexPath) as? PostCellTableViewCell
             
-            cell?.postImageView.image = UIImage(named: "1.jpg")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "textcell", for: indexPath) as? PostCellTableViewCell
+                
+            cell?.textLabel?.text = text1[indexPath.row] as? String
+            cell?.textLabel?.textAlignment = .left
+                
             return cell!
+            
             
         } else {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "locationcell", for: indexPath)
-            
             return cell
         }
+    }
+    
+    private func loadPosts() {
         
     }
 
+    @IBAction func addBtnPost(_ sender: UIBarButtonItem) {
+        
+        let ac = UIAlertController(title: "Add a post", message: "Add a post", preferredStyle: .actionSheet)
+        
+        let photoAction = UIAlertAction(title: "Photo", style: .default) { (action) in
+        }
+        
+        let textAction = UIAlertAction(title: "Text", style: .default) { (action) in
+            
+            let nestedAlert = UIAlertController(title: "Type the text", message: "", preferredStyle: .alert)
+            
+            nestedAlert.addTextField { (text) in
+                text.placeholder = "Type here"
+            }
+            
+            let OKaction = UIAlertAction(title: "OK", style: .default) { (action) in
+                
+                let text = nestedAlert.textFields![0].text
+                
+                print("\n\n", text!)
+               
+                    self.text1.append(text!)
+                
+                self.tableView.reloadData()
+            }
+            
+            nestedAlert.addAction(OKaction)
+            self.present(nestedAlert, animated: true)
+            
+        }
 
+        ac.addAction(photoAction)
+        ac.addAction(textAction)
+        present(ac, animated: true)
+        
+    }
+    
 }
