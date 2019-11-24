@@ -21,6 +21,8 @@
 		276E69C923667A9400179F0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 276E69C723667A9400179F0C /* LaunchScreen.storyboard */; };
 		2779707223825A4E00831558 /* AvailableClassesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2779707123825A4E00831558 /* AvailableClassesTableViewCell.swift */; };
 		277B8ED7236FFB720068280A /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277B8ED6236FFB720068280A /* LocationViewController.swift */; };
+		2791BE9B2388B74500CD1E43 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2791BE9A2388B74500CD1E43 /* MapKit.framework */; };
+		279EC0DD2386473C006E9AAB /* uploading.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 279EC0DC2386473C006E9AAB /* uploading.jpg */; };
 		27B3536023709D6700ADAE2E /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B3535E23709D6600ADAE2E /* checked.png */; };
 		27B3536123709D6700ADAE2E /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B3535F23709D6700ADAE2E /* unchecked.png */; };
 		27BE39C42366887F00125563 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27BE39C32366887F00125563 /* GoogleService-Info.plist */; };
@@ -50,6 +52,8 @@
 		276E69CA23667A9400179F0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2779707123825A4E00831558 /* AvailableClassesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableClassesTableViewCell.swift; sourceTree = "<group>"; };
 		277B8ED6236FFB720068280A /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		2791BE9A2388B74500CD1E43 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		279EC0DC2386473C006E9AAB /* uploading.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = uploading.jpg; sourceTree = "<group>"; };
 		27B3535E23709D6600ADAE2E /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
 		27B3535F23709D6700ADAE2E /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
 		27BE39C32366887F00125563 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -69,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2791BE9B2388B74500CD1E43 /* MapKit.framework in Frameworks */,
 				5D5176F8521B1E1664DB6973 /* Pods_CollabStudy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,10 +86,18 @@
 			children = (
 				27B3535E23709D6600ADAE2E /* checked.png */,
 				27B3535F23709D6700ADAE2E /* unchecked.png */,
+				279EC0DC2386473C006E9AAB /* uploading.jpg */,
 				27119524236D887500A20E84 /* 1.jpg */,
 				2711952D236D888200A20E84 /* 9.jpg */,
 			);
 			path = Media;
+			sourceTree = "<group>";
+		};
+		273ABE4D238A12F7007C48C9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		276E69B023667A9000179F0C = {
@@ -112,8 +125,9 @@
 				276E69BC23667A9000179F0C /* AppDelegate.swift */,
 				276E69BE23667A9000179F0C /* SceneDelegate.swift */,
 				27C8653D23668192004B67C0 /* View Controller */,
-				27C8653B2366818E004B67C0 /* Utilities.swift */,
+				273ABE4D238A12F7007C48C9 /* Model */,
 				276E69C223667A9000179F0C /* Main.storyboard */,
+				27C8653B2366818E004B67C0 /* Utilities.swift */,
 				276E69C523667A9400179F0C /* Assets.xcassets */,
 				27293543238465BF00E0335E /* ScreenShots */,
 				276E69C723667A9400179F0C /* LaunchScreen.storyboard */,
@@ -153,6 +167,7 @@
 		F0321D5E6DDE22122DC61609 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2791BE9A2388B74500CD1E43 /* MapKit.framework */,
 				826948BDFCC7EFB003B364E0 /* Pods_CollabStudy.framework */,
 			);
 			name = Frameworks;
@@ -169,7 +184,7 @@
 				276E69B523667A9000179F0C /* Sources */,
 				276E69B623667A9000179F0C /* Frameworks */,
 				276E69B723667A9000179F0C /* Resources */,
-				EC4C6B4136E79B382B291E99 /* [CP] Embed Pods Frameworks */,
+				6A2E996554EE76709DFE0BC0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -225,6 +240,7 @@
 				27119531236D888400A20E84 /* 1.jpg in Resources */,
 				27B3536023709D6700ADAE2E /* checked.png in Resources */,
 				276E69C423667A9000179F0C /* Main.storyboard in Resources */,
+				279EC0DD2386473C006E9AAB /* uploading.jpg in Resources */,
 				27B3536123709D6700ADAE2E /* unchecked.png in Resources */,
 				2711953A236D888400A20E84 /* 9.jpg in Resources */,
 			);
@@ -255,7 +271,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EC4C6B4136E79B382B291E99 /* [CP] Embed Pods Frameworks */ = {
+		6A2E996554EE76709DFE0BC0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

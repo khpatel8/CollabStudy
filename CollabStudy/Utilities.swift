@@ -5,32 +5,17 @@ class Utilities {
     
     static func styleTextField(_ textfield:UITextField) {
         
-        // Create the bottom line
         let bottomLine = CALayer()
-        
         bottomLine.frame = CGRect(x: 0, y: textfield.frame.height - 2, width: textfield.frame.width, height: 2)
-        
-        bottomLine.backgroundColor = UIColor.init(red: 48/255, green: 173/255, blue: 99/255, alpha: 1).cgColor
-        
-        // Remove border on text field
+        bottomLine.backgroundColor = UIColor.init(red: 70/255, green: 173/255, blue: 70/255, alpha: 1).cgColor
         textfield.borderStyle = .none
-        
-        // Add the line to the text field
         textfield.layer.addSublayer(bottomLine)
         
     }
     
     static func styleFilledButton(_ button:UIButton) {
-        
-        // Filled rounded corner style
         button.backgroundColor = UIColor.init(red: 48/255, green: 173/255, blue: 99/255, alpha: 1)
-    
-        if button.tag == 1 {
-            button.layer.cornerRadius = 20.0
-        }
-        
         button.layer.cornerRadius = 25.0
-
         button.tintColor = UIColor.white
     }
     
@@ -50,4 +35,13 @@ class Utilities {
         return passwordTest.evaluate(with: password)
     }
     
+    static func checkIfURL(urlString: String?) -> Bool {
+        if let urlString = urlString {
+            if let url = URL(string: urlString) {
+                return UIApplication.shared.canOpenURL(url)
+            } 
+        }
+        return false
+    }
+
 }

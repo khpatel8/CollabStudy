@@ -11,7 +11,7 @@ import Firebase
 
 class HomeViewController: UIViewController, UITextFieldDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    var classesArr: [String] = []
+    var classesArray: [String] = []
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -32,7 +32,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UISearchBarDele
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        view.endEditing(true)
         return true
     }
 
@@ -43,7 +43,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UISearchBarDele
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return classesArr.count
+        return classesArray.count
     }
     
 
@@ -51,7 +51,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UISearchBarDele
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AvailableClassesTableViewCell
         
-        cell.textLabel?.text = classesArr[indexPath.row]
+        cell.textLabel?.text = classesArray[indexPath.row]
         
         return cell
     }
@@ -75,20 +75,15 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UISearchBarDele
                 for x in arr {
                     if x == cell?.textLabel!.text {  found = true }
                 }
-                 
-            } else {
-                print("else\n\n")
             }
             
             if found == false {
                 arr.append((cell?.textLabel!.text)!)
                 chilRef.setValue(arr) { (error, dataRef) in
                     if error != nil {
-                        print("Error setting value from didSelect")
+                        print(error!.localizedDescription)
                     }
                 }
-            } else {
-                print("Already exists")
             }
         }
     }
@@ -98,16 +93,12 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UISearchBarDele
         let childRef = Database.database().reference().child("classes")
 
         childRef.observe(.value, with: { (snapshot) in
-    
             if snapshot.exists() {
                 let dic = snapshot.value! as! [String: AnyObject]
                 
-                self.classesArr = Array(dic.keys)
+                self.classesArray = Array(dic.keys).sorted()
                 self.tableView.reloadData()
-            } else {
-                print("\nNothing to load\n")
             }
-            
         })
     }
     
@@ -129,13 +120,15 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UISearchBarDele
             let classDetail = "\(className)\(alertController.textFields![1].text!)"
             
             let childRef = Database.database().reference().child("classes").child(classDetail)
-            
-            childRef.setValue( [ "classname" : classDetail ] )  { (error, dataRef) in
 
-                if error != nil {
-                    print("\n\n \(error!.localizedDescription) \n\n")
-                } else {
-                    
+            DispatchQueue.main.async {
+                childRef.setValue( ["posts" : ["Welcome to the discussion "] ] )  { (error, dataRef) in
+
+                    if error != nil {
+                        print("\n\n \(error!.localizedDescription) \n\n")
+                    } else {
+
+                    }
                 }
             }
         }
@@ -143,8 +136,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UISearchBarDele
         alertController.addAction(addAction)
         present(alertController, animated: true)
     }
-    
-    
     
     
 }

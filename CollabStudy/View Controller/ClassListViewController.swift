@@ -18,6 +18,7 @@ class ClassListViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         // Do any additional setup after loading the view.
         loadClassList()
     }
@@ -40,14 +41,26 @@ class ClassListViewController: UIViewController, UITableViewDataSource, UITableV
         let uid = Auth.auth().currentUser?.uid
         let childRef = Database.database().reference().child(uid!)
         
-        
             childRef.observe(.value) { (snapshot) in
-                let arr = snapshot.value! as? [String]
-                self.classListArr = Array(arr!)
-                self.tableView.reloadData()
+                
+                if snapshot.exists() {
+                    let arr = snapshot.value! as? [String]
+                    self.classListArr = Array(arr!)
+                    self.tableView.reloadData()
+                } else {
+                    print("\nNothing to load")
+                }
+                
             }
-    
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let indexPath: IndexPath = self.tableView!.indexPathForSelectedRow!
+        
+        if let destination = segue.destination as? ClassPostsTableViewController {
+            destination.className = classListArr[indexPath.row]
+        }
+    }
     
 }

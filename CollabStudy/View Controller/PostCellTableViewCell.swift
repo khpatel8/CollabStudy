@@ -12,6 +12,9 @@ class PostCellTableViewCell: UITableViewCell {
 
     @IBOutlet weak var postImageView: UIImageView!
     
+    
+    @IBOutlet weak var labelText: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,7 +26,7 @@ class PostCellTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     
 }
 

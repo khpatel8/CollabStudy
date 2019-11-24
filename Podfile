@@ -6,11 +6,10 @@ target 'CollabStudy' do
   use_frameworks!
 
   # Pods for CollabStudy
-  pod 'Firebase/Analytics'
+  pod 'FirebaseStorage'
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   pod 'Firebase/Database'
-
   
 end
