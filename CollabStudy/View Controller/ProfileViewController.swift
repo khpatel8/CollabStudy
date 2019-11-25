@@ -33,15 +33,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         picker.delegate = self
         fillNameAndEmailfield()
         loadProfileImage()
-        
     }
     
     private func fillNameAndEmailfield() {
-    
         
         let dataRef = Database.database().reference()
         let childRef = dataRef.child("users").child((uid)!)
@@ -75,9 +72,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                         }
                     }
                 }
-               
             }
-            
         }
     }
     
@@ -99,10 +94,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
          view.window?.makeKeyAndVisible()
     }
     
-    
-    @IBAction func editBtn(_ sender: Any) {
-        
-    }
     
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
         
@@ -179,7 +170,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         dismiss(animated: true, completion: nil)
     }
-    
     
     
 }

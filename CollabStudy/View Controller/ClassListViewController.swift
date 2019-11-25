@@ -12,9 +12,10 @@ import Firebase
 
 class ClassListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
     
-    var classListArr: [String] = []
+    var classListArray: userclasslist = userclasslist()
 
     @IBOutlet weak var tableView: UITableView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,14 +26,14 @@ class ClassListViewController: UIViewController, UITableViewDataSource, UITableV
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return classListArr.count
+        return classListArray.getCount()
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = classListArr[indexPath.row]
+        cell.textLabel?.text = classListArray.getObjectAt(index: indexPath.row)
         return cell
     }
     
@@ -45,7 +46,7 @@ class ClassListViewController: UIViewController, UITableViewDataSource, UITableV
                 
                 if snapshot.exists() {
                     let arr = snapshot.value! as? [String]
-                    self.classListArr = Array(arr!)
+                    self.classListArray.classlist = Array(arr!)
                     self.tableView.reloadData()
                 } else {
                     print("\nNothing to load")
@@ -54,12 +55,13 @@ class ClassListViewController: UIViewController, UITableViewDataSource, UITableV
             }
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let indexPath: IndexPath = self.tableView!.indexPathForSelectedRow!
         
         if let destination = segue.destination as? ClassPostsTableViewController {
-            destination.className = classListArr[indexPath.row]
+            destination.className = classListArray.getObjectAt(index: indexPath.row)
         }
     }
     

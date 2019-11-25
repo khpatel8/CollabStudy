@@ -26,7 +26,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate, UIPic
     @IBOutlet weak var label: UILabel!
     
     var locationName: String = ""
-    var libraryList: [String] = []
+    var libraryList: libraries = libraries()
     
     var selectedLocationName: String?
     
@@ -58,12 +58,12 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate, UIPic
     
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        libraryList.count
+        libraryList.getCount()
     }
     
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return libraryList[row]
+        return libraryList.getObjectAt(index: row)
     }
     
     
@@ -73,7 +73,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate, UIPic
         let geoCoder = CLGeocoder()
         
         if searchText.isEmpty {
-            self.libraryList = []
+            self.libraryList.library = []
             self.pickerView.reloadAllComponents()
             self.pickerView.alpha = 0
             saveButton.isEnabled = false
@@ -118,7 +118,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate, UIPic
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = libraryList[row]
+        request.naturalLanguageQuery = libraryList.getObjectAt(index: row)
         
         request.region = mapView.region
         let search = MKLocalSearch(request: request)
@@ -147,11 +147,11 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate, UIPic
             }
         }
         
-        selectedLocationName = self.libraryList[pickerView.selectedRow(inComponent: 0)]
+        selectedLocationName = self.libraryList.getObjectAt(index: pickerView.selectedRow(inComponent: 0))
     }
     
     
-    private func makeAPIcall(latitude: String, longitude: String, urlString: String) {
+    private func makeAPIcall(latitude: String, longitude: String, urlString: String) { 
         
         var newResults: [String] = []
         let url = URL(string: urlString)!
@@ -171,7 +171,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate, UIPic
                 for result in resultsArray! {
                     newResults.append(result as! String)
                 }
-                self.libraryList = newResults
+                self.libraryList.library = newResults
             }
         }
         jsonQuery.resume()

@@ -68,5 +68,10 @@
 	<string>App needs access to your location to perform actions</string>
 	<key>NSLocationUsageDescription</key>
 	<string>App needs access to your location to perform actions</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

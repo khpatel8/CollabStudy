@@ -13,16 +13,15 @@ import Firebase
 
 class ClassPostsTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    let picker = UIImagePickerController()
-    var className: String?
-    
     @IBOutlet weak var addBtn: UIBarButtonItem!
-    var posts: [Any] = []
-    
     @IBOutlet weak var sc: UISegmentedControl!
     
     var dataFromLocationViewController: String?
-       
+    var POST: posts = posts()
+    var className: String?
+    
+    let picker = UIImagePickerController()
+    let cellSpacingHeight: CGFloat = 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +29,7 @@ class ClassPostsTableViewController: UITableViewController, UIImagePickerControl
         picker.delegate = self
         loadPosts()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
+        navigationItem.title = "\(className!)"
     }
 
     
@@ -46,21 +45,39 @@ class ClassPostsTableViewController: UITableViewController, UIImagePickerControl
 
     // MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
         if sc.selectedSegmentIndex == 0 {
-            return posts.count
+            return POST.getCount()
         } else {
             return 1
         }
     }
+
+   
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return cellSpacingHeight
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
     
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let isURL = Utilities.checkIfURL(urlString: self.posts[self.posts.count - indexPath.row - 1] as? String)
+        let postObj = self.POST.getObjectAt(index: self.POST.getCount() - indexPath.section - 1) as? String
+        let isURL = Utilities.checkIfURL( urlString: postObj )
         
         if sc.selectedSegmentIndex == 0 {
             if isURL {
-                return 463
+                return 480
             } else {
                 return 200
             }
@@ -72,13 +89,13 @@ class ClassPostsTableViewController: UITableViewController, UIImagePickerControl
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if sc.selectedSegmentIndex == 0 {
-            let string = self.posts[self.posts.count - indexPath.row - 1] as! String
+            let string = self.POST.getObjectAt(index: self.POST.getCount() - indexPath.section - 1) as? String
             let isURL =  Utilities.checkIfURL(urlString: string)
             
             if isURL {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as? PostCellTableViewCell
                 
-                let url = URL(string: (self.posts[self.posts.count - indexPath.row - 1] as? String)!)
+                let url = URL(string: (self.POST.getObjectAt(index: self.POST.getCount() - indexPath.section - 1) as? String)!)
 
                 DispatchQueue.global().async {
                     if let data = try? Data(contentsOf: url!) {
@@ -91,14 +108,24 @@ class ClassPostsTableViewController: UITableViewController, UIImagePickerControl
                     }
                 }
                 
+                cell!.layer.borderColor = UIColor.black.cgColor
+                cell!.layer.borderWidth = 1
+                cell!.layer.cornerRadius = 8
+                cell!.clipsToBounds = true
+                
                 return cell!
                 
             } else {
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "textcell", for: indexPath) as? PostCellTableViewCell
-            cell?.labelText.text = self.posts[self.posts.count - indexPath.row - 1] as? String
-            cell?.sizeToFit()
-            return cell!
+                let cell = tableView.dequeueReusableCell(withIdentifier: "textcell", for: indexPath) as? PostCellTableViewCell
+                cell?.labelText.text = self.POST.getObjectAt(index: self.POST.getCount() - indexPath.section - 1) as? String
+                cell?.sizeToFit()
+                    
+                cell!.layer.borderColor = UIColor.black.cgColor
+                cell!.layer.borderWidth = 1
+                cell!.layer.cornerRadius = 8
+                cell!.clipsToBounds = true
+                return cell!
             }
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "locationcell", for: indexPath)
@@ -113,17 +140,14 @@ class ClassPostsTableViewController: UITableViewController, UIImagePickerControl
         let dataRef = Database.database().reference().child("classes").child(self.className!)
             
         dataRef.observe(.value) { (snapshot) in
-                
-                let values = snapshot.value! as? [String : AnyObject]
-                    
+            
                 if snapshot.exists() {
-                    self.posts = (values!["posts"]! as? Array)!
-                }
-                
-                DispatchQueue.main.async {
-                    print("\n\nReload from loadPosts()")
-                    print("\nCount: ", self.posts.count, "\nPosts", self.posts)
-                    self.tableView.reloadData()
+                    let values = snapshot.value! as? [String : AnyObject]
+                    self.POST.posts = (values!["posts"]! as? Array)!
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 }
             }
     }
@@ -137,21 +161,32 @@ class ClassPostsTableViewController: UITableViewController, UIImagePickerControl
         
         let photoAction = UIAlertAction(title: "Photo", style: .default) { (action) in
             
-            if UIImagePickerController.isSourceTypeAvailable(.camera) {
-                self.picker.allowsEditing = false
-                self.picker.sourceType = UIImagePickerController.SourceType.camera
-                self.picker.cameraCaptureMode = .photo
-                self.picker.modalPresentationStyle = .fullScreen
-                
-                self.present(self.picker, animated: true, completion: nil)
-                
-            } else {
+            let nestedAlert = UIAlertController(title: "Select an option", message: "", preferredStyle: .alert)
+            
+            let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action) in
+                if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                    self.picker.allowsEditing = false
+                    self.picker.sourceType = UIImagePickerController.SourceType.camera
+                    self.picker.cameraCaptureMode = .photo
+                    self.picker.modalPresentationStyle = .fullScreen
+                    
+                    self.present(self.picker, animated: true, completion: nil)
+                    
+                }
+            }
+            
+            let galleryAction = UIAlertAction(title: "Photo Gallery", style: .default) { (action) in
                 self.picker.allowsEditing = false
                 self.picker.sourceType = .photoLibrary
                 self.picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
                 self.picker.modalPresentationStyle = .popover
                 self.present(self.picker, animated: true, completion: nil)
             }
+            
+            nestedAlert.addAction(cameraAction)
+            nestedAlert.addAction(galleryAction)
+            self.present(nestedAlert, animated: true, completion: nil)
+            
         }
         
         
@@ -169,8 +204,8 @@ class ClassPostsTableViewController: UITableViewController, UIImagePickerControl
                 
                 let text = nestedAlert.textFields![0].text
                 
-                self.posts.append(text!)
-                dataRef.updateChildValues([ "posts" : self.posts])
+                self.POST.addPost(post: text!)
+                dataRef.updateChildValues([ "posts" : self.POST.posts])
                
             }
             
@@ -213,8 +248,8 @@ class ClassPostsTableViewController: UITableViewController, UIImagePickerControl
                                 
                                 DispatchQueue.init(label: "Custom", qos: .userInitiated, attributes: .concurrent).async(execute: {
                                     
-                                    self.posts.append( url!.absoluteString )
-                                    dataRef.updateChildValues([ "posts" : self.posts])
+                                    self.POST.addPost(post: url!.absoluteString)
+                                    dataRef.updateChildValues([ "posts" : self.POST.posts])
                                     })
                             }
                         }

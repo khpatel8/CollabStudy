@@ -9,13 +9,16 @@
 import UIKit
 import Firebase
 
-class HomeViewController: UIViewController, UITextFieldDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class SearchClassViewController: UIViewController, UITextFieldDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    var classesArray: [String] = []
+    var classesArray: classes = classes()
+    
+    var searchBarArray: classes = classes()
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    var searching: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,24 +41,45 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UISearchBarDele
 
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        searchBarArray.list = classesArray.list.filter({ $0.prefix(searchText.count) == searchText })
+        searching = true
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        searchBar.text = ""
+        tableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
     }
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return classesArray.count
+        if searching {
+            return searchBarArray.getCount()
+        } else {
+            return classesArray.getCount()
+        }
     }
     
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AvailableClassesTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.textLabel?.text = classesArray[indexPath.row]
+        if searching {
+            cell.textLabel?.text = searchBarArray.getObjectAt(index: indexPath.row)
+        } else {
+            cell.textLabel?.text = classesArray.getObjectAt(index: indexPath.row)
+
+        }
         
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let uid = Auth.auth().currentUser?.uid
@@ -96,7 +120,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UISearchBarDele
             if snapshot.exists() {
                 let dic = snapshot.value! as! [String: AnyObject]
                 
-                self.classesArray = Array(dic.keys).sorted()
+                self.classesArray.list = Array(dic.keys).sorted()
                 self.tableView.reloadData()
             }
         })
@@ -122,7 +146,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UISearchBarDele
             let childRef = Database.database().reference().child("classes").child(classDetail)
 
             DispatchQueue.main.async {
-                childRef.setValue( ["posts" : ["Welcome to the discussion "] ] )  { (error, dataRef) in
+                childRef.setValue( ["posts" : ["Welcome to the discussion. Be generous to everyone and don't post assignment/code or anything that can cause plagiarism."] ] )  { (error, dataRef) in
 
                     if error != nil {
                         print("\n\n \(error!.localizedDescription) \n\n")
@@ -136,6 +160,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UISearchBarDele
         alertController.addAction(addAction)
         present(alertController, animated: true)
     }
-    
+        
     
 }

@@ -60,7 +60,7 @@ class SignUpViewController: UIViewController {
     
     func transtitionToHome() {
         
-        let homeVC = storyboard?.instantiateViewController(identifier: "HomeVC") as? HomeViewController
+        let homeVC = storyboard?.instantiateViewController(identifier: "HomeVC") as? SearchClassViewController
 
         view.window?.rootViewController = homeVC
         view.window?.makeKeyAndVisible()
